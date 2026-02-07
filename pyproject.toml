@@ -1,0 +1,64 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "postman"
+version = "0.1.0"
+description = "TUI application for generating social media posts for Hong Kong Python User Group events"
+authors = [
+    {name = "Hong Kong Python User Group", email = "community@hkpug.org"},
+]
+readme = "README.md"
+requires-python = ">=3.14"
+license = {text = "MIT"}
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.14",
+    "Topic :: Communications :: Chat",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+]
+keywords = ["tui", "social-media", "llm", "langchain", "openrouter"]
+dependencies = [
+    "textual>=0.42.0",
+    "langchain>=0.1.0",
+    "openai>=1.0.0",
+    "python-dotenv>=1.0.0",
+    "requests>=2.31.0",
+    "langchain-openai>=1.1.7",
+    "pyperclip>=1.11.0",
+    "tenacity>=8.2.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "uv[dev]",
+    "pytest>=7.4.0",
+    "black>=23.0.0",
+    "ruff>=0.1.0",
+]
+
+[project.scripts]
+postman = "postman.app:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+include = ["postman*"]
+
+[tool.ruff]
+line-length = 88
+target-version = "py39"
+
+[tool.black]
+line-length = 88
+target-version = ['py39']
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = ["test_*.py", "*_test.py"]
+python_classes = ["Test*"]
+python_functions = ["test_*"]
+addopts = ["-ra", "--strict-markers", "--strict-config"]
