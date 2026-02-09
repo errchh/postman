@@ -2,56 +2,32 @@
 
 A TUI application for generating social media posts for Hong Kong Python User Group events.
 
+## Screenshot
+
+![Postman TUI Screenshot](screenshot.png)
+
 ## Features
 
 - **Interactive TUI**: Built with Textual for a smooth terminal experience
 - **Multi-platform**: Generate posts optimized for LinkedIn, Facebook, Twitter, and Instagram
 - **LLM-powered**: Uses OpenRouter API with LangChain for intelligent content generation
-- **Real-time streaming**: Watch your posts generate in real-time
-- **Side-by-side layout**: Input form and preview panel for efficient workflow
-- **Secure**: API keys never exposed in logs or errors
 
 ## Requirements
 
 - Python 3.14+
 - OpenRouter API key
 
-## Installation
+## Usage
 
-1. Clone the repository:
-```bash
-git clone <repo-url>
-cd postman
-```
-
-2. Set up the virtual environment:
 ```bash
 uv venv
 source .venv/bin/activate
-```
 
-3. Install dependencies:
-```bash
 uv sync
-```
 
-4. Configure your environment:
-```bash
 cp .env.example .env
 # Edit .env and add your OpenRouter API key
-```
 
-## Usage
-
-Run the application:
-
-```bash
-postman
-```
-
-Or run directly:
-
-```bash
 uv run python -m postman.app
 ```
 
@@ -79,31 +55,6 @@ Environment variables (in `.env` file):
 - `POSTMAN_MIN_WIDTH` - Minimum terminal width (default: 80)
 - `POSTMAN_MIN_HEIGHT` - Minimum terminal height (default: 24)
 - `POSTMAN_DEBUG` - Enable debug mode (default: 0)
-
-## Architecture
-
-```
-src/postman/
-├── __init__.py      # Package initialization
-├── config.py        # Environment configuration
-├── llm.py          # OpenRouter/LangChain integration
-├── prompts.py      # Platform-specific prompts
-├── app.py          # Main TUI application
-└── tui/            # TUI components
-    └── __init__.py
-```
-
-## Development
-
-Run linting:
-```bash
-ruff check src/
-```
-
-Format code:
-```bash
-black src/
-```
 
 ## License
 
