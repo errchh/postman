@@ -20,3 +20,4 @@ idea/
 .ruff_cache
 openspec/
 project-brief.md 
+specs/
