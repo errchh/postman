@@ -92,16 +92,12 @@ class PreviewScreen(Screen[None]):
                 with Horizontal(classes="platform-row"):
                     # First column
                     platform1 = self.platforms[i]
-                    card1 = PlatformCard(platform1, id=f"card-{platform1}")
-                    card1.styles.width = "50%"
-                    yield card1
+                    yield PlatformCard(platform1, id=f"card-{platform1}")
 
                     # Second column (if exists)
                     if i + 1 < len(self.platforms):
                         platform2 = self.platforms[i + 1]
-                        card2 = PlatformCard(platform2, id=f"card-{platform2}")
-                        card2.styles.width = "50%"
-                        yield card2
+                        yield PlatformCard(platform2, id=f"card-{platform2}")
         with Horizontal(classes="button-container"):
             yield Button("Back", id="back", variant="primary")
         yield Footer()
@@ -130,9 +126,9 @@ class PreviewScreen(Screen[None]):
 class Postman(App):
     """Main Postman TUI application."""
 
-    CSS = """
-    Screen { background: #1a1b26; color: #a9b1d6; }
+    theme = "textual-light"
 
+    CSS = """
     .scroll-view {
         width: 100%;
         height: 100%;
@@ -140,28 +136,22 @@ class Postman(App):
     }
 
     .section-label {
-        color: #7aa2f7;
         text-style: bold;
         margin-top: 0;
         margin-bottom: 1;
     }
 
-    /* Consistent spacing: each field block gets the same gap below */
     VerticalGroup {
         margin-bottom: 2;
     }
 
     Input {
         height: 3;
-        border: solid #3d3d4a;
-        background: #1f2335;
         margin-bottom: 0;
     }
 
     TextArea {
         height: 8;
-        border: solid #3d3d4a;
-        background: #1f2335;
         margin-bottom: 0;
     }
 
@@ -188,35 +178,28 @@ class Postman(App):
 
     Button { margin-right: 1; }
 
-    .output-content {
-        width: 100%;
-        height: auto;
-        border: solid #3d3d4a;
-        padding: 1;
-        background: #1f2335;
-    }
-    
     .platform-title {
-        color: #7aa2f7;
         text-style: bold;
         margin-bottom: 1;
     }
-    
+
     .platform-content {
         width: 100%;
         height: auto;
         min-height: 5;
-        border: solid #3d3d4a;
         padding: 1;
-        background: #1f2335;
         margin-bottom: 1;
     }
-    
+
     .banner {
         width: 100%;
         height: auto;
         margin-bottom: 2;
         text-align: left;
+    }
+
+    PlatformCard {
+        width: 50%;
     }
     """
 
@@ -231,20 +214,22 @@ class Postman(App):
         self.platform_outputs: Dict[str, str] = {}
         self.form_state = {}
 
-
     def compose(self) -> ComposeResult:
         yield Header(show_clock=True)
         with VerticalScroll(classes="scroll-view"):
             yield Static(
-                """        
-          ▄████████▄
-         ██▀▀▀▀▀▀▀▀██      [bold]POSTMAN[/bold] [dim]v1.0[/dim]
-        ▄██  █  █  ██▄     ───────────────────────────────────
-        ███  ▀  ▀  ███     [blue]INFO:[/blue] Social Media Post Agent in .py
-        ▀████████████▀     [yellow]>>_[/yellow]
-           ▄█ ██ █▄
-           ▀  ▀▀  ▀
-            """,
+                r"""    
+    ___       ___       ___       ___       ___       ___       ___   
+   /\  \     /\  \     /\  \     /\  \     /\__\     /\  \     /\__\  
+  /::\  \   /::\  \   /::\  \    \:\  \   /::L_L_   /::\  \   /:| _|_ 
+ /::\:\__\ /:/\:\__\ /\:\:\__\   /::\__\ /:/L:\__\ /::\:\__\ /::|/\__\
+ \/\::/  / \:\/:/  / \:\:\/__/  /:/\/__/ \/_/:/  / \/\::/  / \/|::/  /
+    \/__/   \::/  /   \::/  /   \/__/      /:/  /    /:/  /    |:/  / 
+             \/__/     \/__/               \/__/     \/__/     \/__/  
+
+[bold]POSTMAN[/bold] [dim]v1.0[/dim]
+Social Media Post Agent in .py
+                """,
                 id="banner",
                 classes="banner",
             )
