@@ -28,7 +28,7 @@ uv sync
 cp .env.example .env
 # Edit .env and add your OpenRouter API key
 
-uv run python -m postman.app
+uv run postman 
 ```
 
 ### Using the App

@@ -417,5 +417,10 @@ Social Media Post Agent in .py
             self.exit()
 
 
-if __name__ == "__main__":
+def main():
+    """Main entry point for the postman CLI."""
     Postman().run()
+
+
+if __name__ == "__main__":
+    main()
